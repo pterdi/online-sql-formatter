@@ -1,1 +1,1 @@
-# online-sql-formatter
+# 🎓 Online SQL Formatter
