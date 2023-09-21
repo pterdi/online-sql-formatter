@@ -19,7 +19,7 @@ else:
 # Main page
 input_sql = st.text_area("Enter your SQL query here", height=400, key="sql")
 input_sql_with_config = f"-- sqlfluff:layout:type:comma:line_position:{comma_style}\n-- sqlfluff:rules:capitalisation.keywords:capitalisation_policy:upper\n-- sqlfluff:indentation:indented_joins:{join_style}\n-- sqlfluff:exclude_rules:LT12\n{input_sql}"
-lint = sf.lint(input_sql_with_config, dialect=selected_dialect)
+lint = sf.lint(input_sql_with_config, dialect=selected_dialect, config_path=".sqlfluff")
 params = input_sql_with_config.count("-- sqlfluff:")
 issues = []
 for record in lint:
@@ -28,7 +28,7 @@ for record in lint:
     description = record.get("description")
     issue = {"Line / Position": pos, "Rule": rule, "Description": description}
     issues.append(issue)
-output_sql = sf.fix(input_sql_with_config, dialect=selected_dialect)
+output_sql = sf.fix(input_sql_with_config, dialect=selected_dialect, config_path=".sqlfluff")
 output_sql_without_config_list = []
 for row in output_sql.split("\n"):
     if row == "":
