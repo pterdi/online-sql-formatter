@@ -1,2 +1,2 @@
 [sqlfluff]
-exclude_rules = structure.column_order
+exclude_rules = LT12, ST06
